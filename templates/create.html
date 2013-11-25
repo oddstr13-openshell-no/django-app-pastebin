@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if reply %}You are replying to <a class="monospace" href="{% url 'pastebin.views.show' reply.urlid %}">{{ reply.urlid }}</a>{% endif %}
+  <form action="{% url 'pastebin.views.create' %}" method="POST">
+    {{ form.as_p }}
+    <input type="submit" />
+  </form>
+{% endblock %}

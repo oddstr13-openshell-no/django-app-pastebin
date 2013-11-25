@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% comment %}<a href="{% url 'pastebin.views.create' %}">Create paste.</a>{% endcomment %}
+  <form action="{% url 'pastebin.views.create' %}" method="POST">
+    {{ form.as_p }}
+    <input type="submit" style="margin:auto;" />
+  </form>
+  
+  
+  <ul>
+  {% for paste in pastes %}
+    <li><a class="monospace" href="{% url 'pastebin.views.show' paste.urlid %}">{{ paste.urlid }}</a> - {{ paste.time }} - {{ paste.lang.name }}</li>
+  {% endfor %}
+  </ul>
+{% endblock %}

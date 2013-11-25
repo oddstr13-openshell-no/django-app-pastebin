@@ -1,0 +1,11 @@
+.source  {
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.source pre {
+    font-family: ConsolaMono;
+    font-size: 0.8em;
+    margin: 0;
+    padding: 0;
+}
