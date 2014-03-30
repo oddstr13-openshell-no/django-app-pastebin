@@ -19,3 +19,13 @@ class Lang(models.Model):
 
     def __unicode__(self):
         return self.name or self.code
+
+class Ban(models.Model):
+    ip     = models.GenericIPAddressField(unique=True)
+    reason = models.CharField(max_length=256, blank=True, default="")
+    time   = models.DateTimeField(auto_now_add=True)
+    end    = models.DateTimeField(blank=True, null=True, default=None)
+    hits   = models.IntegerField(blank=True, default=0)
+    
+    def getReason(self):
+        return self.reason or u"No reason given."

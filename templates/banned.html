@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Banned :: Paste :: {% endblock %}
+{% block content %}
+  <div class="banned">
+    Sorry, you ({{ ban.ip }}) are banned from posting to this pastebin.<br />
+    Reason: {{ ban.getReason }} <br />
+    {% if ban.end %}
+    This ban ends on: {{ ban.end }} UTC
+    {% endif %}
+  </div>
+  
+  <ul>
+  {% for paste in pastes %}
+    <li><a class="monospace" href="{% url 'pastebin.views.show' paste.urlid %}">{{ paste.urlid }}</a> - {{ paste.time }} - {{ paste.lang.name }}</li>
+  {% endfor %}
+  </ul>
+{% endblock %}

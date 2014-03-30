@@ -3,7 +3,10 @@
 {% block content %}
   {% if reply %}You are replying to <a class="monospace" href="{% url "pastebin.views.show" reply.urlid %}">{{ reply.urlid }}</a>{% endif %}
   <form action="{% url "pastebin.views.reply" reply.urlid %}" method="POST">
+    {#% csrf_token %#}
     {{ form.as_p }}
+    <input type='hidden' name='csrfmiddlewaretoken' value='' id='form_csrf' />
     <input type="submit" />
   </form>
+  <script>document.getElementById('form_csrf').value = '{{ csrf_token }}';</script>
 {% endblock %}
