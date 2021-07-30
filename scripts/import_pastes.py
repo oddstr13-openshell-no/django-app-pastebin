@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 import sys
 import os
 import json
@@ -6,6 +6,7 @@ import time
 import datetime
 
 BASEPATH = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+print(BASEPATH)
 sys.path = [BASEPATH] + sys.path
 os.environ['DJANGO_SETTINGS_MODULE'] = "%s.settings" %(os.path.basename(BASEPATH))
 
@@ -20,7 +21,7 @@ if not os.listdir(importdir):
     exit()
 
 
-from django.core.files import File
+#from django.core.files import File
 from pastebin.models import Paste, Lang
 
 for fn in os.listdir(importdir):

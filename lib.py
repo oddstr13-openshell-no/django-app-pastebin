@@ -18,12 +18,51 @@ def genUrlid():
 
 from pygments import highlight
 from pygments.lexers import get_lexer_by_name
+from pygments.lexer import RegexLexer
 from pygments.formatters import HtmlFormatter
+from pygments import token
+
+
+class ShurtleLexer(RegexLexer):
+    # by Cruor
+    name = "Shurtle"
+    aliases = ["shurtle"]
+    filenames = ["*.g"]
+
+    tokens = {
+        "root": [
+            (r"\d+", token.Literal.Number),
+            (r"0x[0-9a-fA-F]+", token.Literal.Number.Hex),
+            (r"\d+\.?\d*", token.Literal.Number),
+            (r"[\-]?\d+\.?\d*", token.Literal.Number),
+            (r"[\-]?\d+\.?\d*[eE][\+\-]?\d+", token.Literal.Number),
+            (r"\d+\.?\d*[eE][\+\-]?\d+", token.Literal.Number),
+
+            (r"'.*?'", token.Literal.String),
+
+            (r"\s+", token.Comment),
+
+            (r"[A-Z]", token.Name.Variable),
+
+            (r".", token.Operator)
+        ]
+    }
+
+LOCAL_LEXERS = {
+    'shurtle': ShurtleLexer(),
+}
+
+def getLexer(lang):
+    lexer = LOCAL_LEXERS.get(lang, None)
+    if lexer is not None:
+        return lexer
+
+    try:
+        return get_lexer_by_name(lang)
+    except:
+        return get_lexer_by_name("text")
 
 def pygmentize(value, lang="text"):
-    try:
-        lexer = get_lexer_by_name(lang)
-    except:
-        lexer = get_lexer_by_name("text")
+    lexer = getLexer(lang)
     formatter = HtmlFormatter(cssclass="source")
     return highlight(value, lexer, formatter)
