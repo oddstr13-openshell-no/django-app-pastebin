@@ -1,11 +1,11 @@
-from django.conf.urls import url
+from django.urls import re_path
 
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.index),
-    url(r'^create/?$', views.create, name='pastebin-create'),
-    url(r'^(?P<urlid>.+)/$', views.show, name='pastebin-show'),
-    url(r'^(?P<urlid>.+)/raw/?$', views.showraw, name='pastebin-showraw'),
-    url(r'^(?P<urlid>.+)/reply/?$', views.reply, name='pastebin-reply'),
+    re_path(r'^$', views.index),
+    re_path(r'^create/?$', views.create, name='pastebin-create'),
+    re_path(r'^(?P<urlid>.+)/$', views.show, name='pastebin-show'),
+    re_path(r'^(?P<urlid>.+)/raw/?$', views.showraw, name='pastebin-showraw'),
+    re_path(r'^(?P<urlid>.+)/reply/?$', views.reply, name='pastebin-reply'),
 ]
