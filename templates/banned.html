@@ -11,7 +11,7 @@
   
   <ul>
   {% for paste in pastes %}
-    <li><a class="monospace" href="{% url 'pastebin.views.show' paste.urlid %}">{{ paste.urlid }}</a> - {{ paste.time }} - {{ paste.lang.name }}</li>
+    <li><a class="monospace" href="{% url 'pastebin-show' paste.urlid %}">{{ paste.urlid }}</a> - {{ paste.time }} - {{ paste.lang.name }}</li>
   {% endfor %}
   </ul>
 {% endblock %}

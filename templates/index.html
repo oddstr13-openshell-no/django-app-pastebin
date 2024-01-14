@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Paste :: {% endblock %}
 {% block content %}
-  {% comment %}<a href="{% url 'pastebin.views.create' %}">Create paste.</a>{% endcomment %}
-  <form action="{% url 'pastebin.views.create' %}" method="POST">
+  {% comment %}<a href="{% url 'pastebin-create' %}">Create paste.</a>{% endcomment %}
+  <form action="{% url 'pastebin-create' %}" method="POST">
     {#% csrf_token %#}
     {{ form.as_p }}
     <input type='hidden' name='csrfmiddlewaretoken' value='' id='form_csrf' />
@@ -12,7 +12,7 @@
   
   <ul>
   {% for paste in pastes %}
-    <li><a class="monospace" href="{% url 'pastebin.views.show' paste.urlid %}">{{ paste.urlid }}</a> - {{ paste.time }} - {{ paste.lang.name }}</li>
+    <li><a class="monospace" href="{% url 'pastebin-show' paste.urlid %}">{{ paste.urlid }}</a> - {{ paste.time }} - {{ paste.lang.name }}</li>
   {% endfor %}
   </ul>
 {% endblock %}

@@ -6,15 +6,15 @@
 {% endblock %}
 
 {% block content %}
-    <a href="{% url 'pastebin.views.reply' paste.urlid %}">Reply</a> -
-    <a href="{% url 'pastebin.views.showraw' paste.urlid %}">Raw</a> <br />
+    <a href="{% url 'pastebin-reply' paste.urlid %}">Reply</a> -
+    <a href="{% url 'pastebin-showraw' paste.urlid %}">Raw</a> <br />
     
-    {% if paste.replyto %}This is a reply to <a class="monospace" href="{% url 'pastebin.views.show' paste.replyto.urlid %}">{{ paste.replyto.urlid }}</a><br />{% endif %}
+    {% if paste.replyto %}This is a reply to <a class="monospace" href="{% url 'pastebin-show' paste.replyto.urlid %}">{{ paste.replyto.urlid }}</a><br />{% endif %}
     {% if paste.replies.all %}
     Replies:
     <ul style="display:inline-block;margin:0;padding:0;">
         {% for reply in paste.replies.all %}
-        <li style="display:inline-block;"><a class="monospace" href="{% url 'pastebin.views.show' reply.urlid %}">{{ reply.urlid }}</a></li>
+        <li style="display:inline-block;"><a class="monospace" href="{% url 'pastebin-show' reply.urlid %}">{{ reply.urlid }}</a></li>
         {% endfor %}
     </ul>
     <br />
