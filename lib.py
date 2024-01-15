@@ -2,16 +2,18 @@ from time import time as time_t
 from random import randint
 from base64 import b64encode
 
+
 def n2b(n):
     res = ""
     while n:
-        c = chr(n & 0xff)
+        c = chr(n & 0xFF)
         res = c + res
         n >>= 8
     return res
 
+
 def genUrlid():
-    b = n2b(int(time_t())) + n2b(randint(0x0000,0xffff))
+    b = n2b(int(time_t())) + n2b(randint(0x0000, 0xFFFF))
     res = b64encode(b, "-_").strip("=")
     return res
 
@@ -37,20 +39,18 @@ class ShurtleLexer(RegexLexer):
             (r"[\-]?\d+\.?\d*", token.Literal.Number),
             (r"[\-]?\d+\.?\d*[eE][\+\-]?\d+", token.Literal.Number),
             (r"\d+\.?\d*[eE][\+\-]?\d+", token.Literal.Number),
-
             (r"'.*?'", token.Literal.String),
-
             (r"\s+", token.Comment),
-
             (r"[A-Z]", token.Name.Variable),
-
-            (r".", token.Operator)
+            (r".", token.Operator),
         ]
     }
 
+
 LOCAL_LEXERS = {
-    'shurtle': ShurtleLexer(),
+    "shurtle": ShurtleLexer(),
 }
+
 
 def getLexer(lang):
     lexer = LOCAL_LEXERS.get(lang, None)
@@ -61,6 +61,7 @@ def getLexer(lang):
         return get_lexer_by_name(lang)
     except:
         return get_lexer_by_name("text")
+
 
 def pygmentize(value, lang="text"):
     lexer = getLexer(lang)

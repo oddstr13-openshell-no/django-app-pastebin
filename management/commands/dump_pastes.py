@@ -22,23 +22,27 @@ class Lang(models.Model):
     promote = models.BooleanField(default=False)           # List on the top / commonly used
 """
 
-OUTPUT = os.path.join('dump', 'pastebin')
+OUTPUT = os.path.join("dump", "pastebin")
+
 
 class Command(BaseCommand):
-    help = 'Dumps paste entries'
+    help = "Dumps paste entries"
 
     def handle(self, *args, **options):
         if not os.path.exists(OUTPUT):
             os.makedirs(OUTPUT)
-        
+
         for p in Paste.objects.all():
-            with open(os.path.join(OUTPUT, p.urlid) + '.json', 'w') as fh:
-                json.dump({
-                    'id': p.urlid,
-                    'ip': str(p.ip),
-                    'content': p.text,
-                    'lang': p.lang.code,
-                    'private': p.private,
-                    'posted': p.time.isoformat(' '),
-                    'parent': p.replyto.urlid if p.replyto else None,
-                }, fh)
+            with open(os.path.join(OUTPUT, p.urlid) + ".json", "w") as fh:
+                json.dump(
+                    {
+                        "id": p.urlid,
+                        "ip": str(p.ip),
+                        "content": p.text,
+                        "lang": p.lang.code,
+                        "private": p.private,
+                        "posted": p.time.isoformat(" "),
+                        "parent": p.replyto.urlid if p.replyto else None,
+                    },
+                    fh,
+                )
